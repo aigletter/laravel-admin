@@ -1,5 +1,5 @@
 {
-    "name": "encore/laravel-admin",
+    "name": "fork-encore/laravel-admin",
     "description": "laravel admin",
     "type": "library",
     "keywords": ["laravel", "admin", "grid", "form"],
@@ -13,12 +13,12 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "symfony/dom-crawler": "~3.1|~4.0|~5.0",
-        "laravel/framework": ">=5.5",
-        "doctrine/dbal": "2.*"
+        "symfony/dom-crawler": "^5.2",
+        "laravel/framework": ">=8.0",
+        "doctrine/dbal": "^3.1.0"
     },
     "require-dev": {
-        "laravel/laravel": ">=5.5",
+        "laravel/laravel": ">=8.0",
         "fzaninotto/faker": "~1.4",
         "intervention/image": "~2.3",
         "laravel/browser-kit-testing": "^6.0",
@@ -57,5 +57,6 @@
                 "Admin": "Encore\\Admin\\Facades\\Admin"
             }
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
