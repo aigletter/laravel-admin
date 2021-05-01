@@ -1,5 +1,5 @@
 {
-    "name": "aigletter/laravel-admin-fork",
+    "name": "aigletter/laravel-admin",
     "description": "laravel admin",
     "type": "library",
     "keywords": ["laravel", "admin", "grid", "form"],
