@@ -1,5 +1,5 @@
 {
-    "name": "encore/laravel-admin",
+    "name": "aigletter/laravel-admin-fork",
     "description": "laravel admin",
     "type": "library",
     "keywords": ["laravel", "admin", "grid", "form"],
