@@ -260,11 +260,11 @@ class Grid
      */
     public function column($name, $label = '')
     {
-        if (Str::contains($name, '.')) {
+        if (is_string($name) && Str::contains($name, '.')) {
             return $this->addRelationColumn($name, $label);
         }
 
-        if (Str::contains($name, '->')) {
+        if (is_string($name) && Str::contains($name, '->')) {
             return $this->addJsonColumn($name, $label);
         }
 
@@ -339,17 +339,25 @@ class Grid
      */
     protected function addRelationColumn($name, $label = '')
     {
-        list($relation, $column) = explode('.', $name);
+        $segments = explode('.', $name);
+        $column = array_pop($segments);
+        $relation = implode('.', $segments);
 
         $model = $this->model()->eloquent();
+        do {
+            $segment = array_shift($segments);
+            if (!method_exists($model, $segment) || !$model->{$segment}() instanceof Relations\Relation) {
+                $class = get_class($model);
 
-        if (!method_exists($model, $relation) || !$model->{$relation}() instanceof Relations\Relation) {
-            $class = get_class($model);
+                admin_error("Call to undefined relationship [{$relation}] on model [{$class}].");
 
-            admin_error("Call to undefined relationship [{$relation}] on model [{$class}].");
+                return $this;
+            }
 
-            return $this;
-        }
+            if ($segments) {
+                $model = $model->{$segment}()->getRelated();
+            }
+        } while ($segments);
 
         $name = ($this->shouldSnakeAttributes() ? Str::snake($relation) : $relation).'.'.$column;
 
